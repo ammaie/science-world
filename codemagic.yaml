@@ -1,29 +1,29 @@
+
 workflows:
   android-release:
     name: Android Release
     instance_type: mac_mini_m2
     max_build_duration: 90
+
     environment:
       flutter: 3.47.9
       java: 17
       vars:
         SUPABASE_URL: "SET_IN_CODEMAGIC"
         SUPABASE_ANON_KEY: "SET_IN_CODEMAGIC"
+
     scripts:
-      - name: Flutter clean and install
+      - name: Verify Flutter version
         script: |
+          flutter --version
           flutter clean
           flutter pub get
+
       - name: Build APK
         script: |
-          if [ -f "android/key.properties" ] || [ -n "$CM_KEYSTORE_PATH" ]; then
-            flutter build apk --release \
-              --dart-define=SUPABASE_URL="$SUPABASE_URL" \
-              --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
-          else
-            flutter build apk --debug \
-              --dart-define=SUPABASE_URL="$SUPABASE_URL" \
-              --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
-          fi
+          flutter build apk --release \
+            --dart-define=SUPABASE_URL="$SUPABASE_URL" \
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
+
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
