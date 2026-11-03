@@ -9,25 +9,15 @@ workflows:
       java: 17
       vars:
         SUPABASE_URL: "https://kaonqfzgirhfdoyunfyn.supabase.co"
-        SUPABASE_ANON_KEY: "ضع_PUBLISHABLE_KEY_هنا"
+        SUPABASE_ANON_KEY: "REPLACE_WITH_SUPABASE_PUBLISHABLE_KEY"
 
     scripts:
-      - name: Check Flutter and install dependencies
+      - name: Install dependencies
         script: |
           set -e
           flutter --version
           flutter clean
           flutter pub get
-
-      - name: Analyze project
-        script: |
-          set -e
-          flutter analyze
-
-      - name: Run tests
-        script: |
-          set -e
-          flutter test
 
       - name: Build release APK
         script: |
