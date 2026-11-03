@@ -43,7 +43,45 @@ class _WorldHubPageState extends State<WorldHubPage> {
   @override Widget build(BuildContext context) => Directionality(textDirection:TextDirection.rtl,child:Scaffold(
     appBar:AppBar(title:const Text('عالمي الخاص'),actions:[IconButton(tooltip:'الإعدادات الصوتية',icon:const Icon(Icons.volume_up),onPressed:()=>context.go('/settings'))]),
     body:_busy?const Center(child:CircularProgressIndicator()):ListView(padding:const EdgeInsets.all(16),children:[
-      Container(padding:const EdgeInsets.all(18),decoration:BoxDecoration(gradient:const LinearGradient(colors:[Color(0xff102a56),Color(0xff176b87)]),borderRadius:BorderRadius.circular(22)),child:Row(children:[Text(_avatar,style:const TextStyle(fontSize:48)),const SizedBox(width:14),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[const Text('عالمك يتطور معك',style:TextStyle(color:Colors.white,fontSize:21,fontWeight:FontWeight.bold)),Text('$_xp نقطة خبرة • المستوى ${1+_xp~/100}',style:const TextStyle(color:Colors.white70)),const SizedBox(height:8),LinearProgressIndicator(value:(_xp%100)/100,backgroundColor:Colors.white24)]))]),
+      Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xff102a56), Color(0xff176b87)],
+          ),
+          borderRadius: BorderRadius.circular(22),
+        ),
+        child: Row(
+          children: [
+            Text(_avatar, style: const TextStyle(fontSize: 48)),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'عالمك يتطور معك',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '$_xp نقطة خبرة • المستوى ${1 + _xp ~/ 100}',
+                    style: const TextStyle(color: Colors.white70),
+                  ),
+                  const SizedBox(height: 8),
+                  LinearProgressIndicator(
+                    value: (_xp % 100) / 100,
+                    backgroundColor: Colors.white24,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
       const SizedBox(height:18), _section('غرفتي ومختبري',Icons.science,[
         ListTile(leading:const Icon(Icons.king_bed),title:Text('تطوير الغرفة — المستوى $_roomLevel'),subtitle:const Text('كل ترقية تفتح ديكورًا جديدًا (تقدم محلي محفوظ)'),trailing:const Icon(Icons.add_circle_outline),onTap:()=>_upgrade('room')),
         ListTile(leading:const Icon(Icons.biotech),title:Text('المختبر الافتراضي — المستوى $_labLevel'),subtitle:const Text('اختر تجربة آمنة وتعرّف إلى فكرتها'),trailing:const Icon(Icons.arrow_forward_ios,size:16),onTap:()=>_showLab()),
